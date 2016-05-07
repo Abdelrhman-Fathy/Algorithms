@@ -1,0 +1,38 @@
+<project name="Tutorial" default="deploy">
+	<property name="wls.username" value="weblogic" />
+	<property name="wls.password" value="welcome1" />
+	<property name="wls.hostname" value="127.0.0.1" />
+	<property name="wls.port" value="7001" />
+	<property name="build-directory" value="build" />
+	<property name="admin.server.name" value="AdminServer" />
+	<property name="deploy.target" value="AdminServer" />
+	<property name="deploy.name" value="Tutorial" />
+	<property name="deploy.source" value="${build-directory}/Tutorial.war" />
+	<property name="war-file-name" value="Tutorial.war" />
+	<property name="builder" value="Abdelrhman" />
+	<tstamp prefix="build-info">
+		<format property="current-date" pattern="d-MMMM-yyy" locale="en" />
+		<format property="current-time" pattern="hh:mm:ss a z" locale="en" />
+	</tstamp>
+	<taskdef name="wldeploy" classname="weblogic.ant.taskdefs.management.WLDeploy" />
+
+	<target name="undeploy">
+		<wldeploy name="${deploy.name}" failonerror="false" user="${wls.username}" password="${wls.password}" verbose="true" adminurl="t3://${wls.hostname}:${wls.port}" targets="${deploy.target}" />
+	</target>
+	<target name="war" depends="undeploy">
+		<mkdir dir="${build-directory}" />
+		<delete file="${build-directory}/lib" />
+		<delete file="${build-directory}/${war-file-name}" />
+		<war destfile="${build-directory}/${war-file-name}" webxml="../Tutorial/WebContent/WEB-INF/web.xml">
+			<fileset dir="../Tutorial/WebContent" />
+			<classes dir="../Tutorial/build/classes" />
+		</war>
+	</target>
+	
+	<target name="deploy" depends="war">
+			<wldeploy name="${deploy.name}" failonerror="false" user="${wls.username}" 
+				password="${wls.password}" verbose="true" adminurl="t3://${wls.hostname}:${wls.port}" targets="${deploy.target}" 
+			action="deploy" upload="true" remote="true" debug="true" nostage="true" source="${deploy.source}"
+			/>
+		</target>
+</project>
