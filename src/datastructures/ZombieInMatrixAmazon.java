@@ -17,9 +17,7 @@ public class ZombieInMatrixAmazon {
 				                            {0, 1, 0, 0, 0}}));
 
 	}
-	public int encodeItemPosition(int row, int column, int columnsCount) {
-		return (row*columnsCount + column);
-	}
+	
 	
 	public int zombieTime(int[][] grid) {
 		
@@ -31,7 +29,7 @@ public class ZombieInMatrixAmazon {
 		for(int row = 0; row < rowsCount; row++) {
 			for(int column = 0; column < columnsCount; column++) {
 				if(grid[row][column] == 1) {
-					int position = encodeItemPosition(row,column, columnsCount);
+					int position = row*columnsCount + column;
 					zombies.add(position);
 					zombiesDistance.put(position, 0);
 				}
@@ -45,20 +43,18 @@ public class ZombieInMatrixAmazon {
 		
 		while(!zombies.isEmpty()) {
 			int position = zombies.remove();
-			int row = decodeRow(position, columnsCount);
-			int column = decodeColumn(position, columnsCount);
+			int row = position/columnsCount;
+			int column = position%columnsCount;
 			for(int step = 0; step < 4; step++) {
 				int nextRow = row + rowSteps[step];
 				int nextColumn = column + columnSteps[step];
-				if(nextRow >= 0 && nextRow <rowsCount && nextColumn >= 0 && nextColumn < columnsCount 
-						&& grid[nextRow][nextColumn] == 0) {
+				if(nextRow >= 0 && nextRow <rowsCount && nextColumn >= 0 && nextColumn < columnsCount && grid[nextRow][nextColumn] == 0) {
 					grid[nextRow][nextColumn] = 1;
-					int nextPosition = encodeItemPosition(nextRow, nextColumn, columnsCount);
+					int nextPosition = nextRow * columnsCount + column; 
 					zombies.add(nextPosition);
 					zombiesDistance.put(nextPosition, zombiesDistance.get(position)+1);
 					maxDistance = zombiesDistance.get(nextPosition);
 				}
-				
 			}
 		}
 		
@@ -73,12 +69,7 @@ public class ZombieInMatrixAmazon {
 		return maxDistance;
 	}
 	
-	public int  decodeRow(int position, int columnsCount) {
-		return (position/columnsCount);
-	}
-	public int  decodeColumn(int position, int columnsCount) {
-		return (position%columnsCount);
-	}
+	
 
 }
 
