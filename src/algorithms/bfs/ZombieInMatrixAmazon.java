@@ -1,4 +1,4 @@
-package datastructures;
+package algorithms.bfs;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
