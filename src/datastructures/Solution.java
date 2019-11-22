@@ -22,7 +22,7 @@ public class Solution {
 		
 		graph = new HashMap<>();
 		Map<Integer,Integer> zombiesDistance = new HashMap<>();
-		for(int row = 0; row < rows; row++) {
+		/*for(int row = 0; row < rows; row++) {
 			for(int col = 0; col < column; column++) {
 				int position = encodeItemPosition(row,col, column);
 				if(grid.get(row).get(col) == 1) {
@@ -43,7 +43,7 @@ public class Solution {
 					
 				
 			}
-		}
+		}*/
 		
 		int size = rows * column;
 		for(int row = 0; row < rows; row++) {

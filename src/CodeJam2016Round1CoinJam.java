@@ -55,7 +55,7 @@ public class CodeJam2016Round1CoinJam {
 						s = oldString;
 						break;
 					}else{
-						s.setCharAt(j, '');
+						//s.setCharAt(j, '');
 					}
 				}
 				if(numberExist){
