@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Queue;
 
-
+//https://github.com/Abdelrhman-Fathy/Algorithms/blob/master/OA-Amazon-Q1.JPG
 public class TreasureTruck {
 	public static void main(String[] args) {
 		List<List<Integer>> areas = new ArrayList();
