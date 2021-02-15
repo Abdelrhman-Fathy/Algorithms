@@ -24,26 +24,6 @@ public class MoneyChangeDevice {
 		}
 		scanner.close();
 	}
-	/*
-0.50:200 10.00:100 5.00:100
-4
-25.00
-7.50
-5.25
-14.00
-
-	*/
-	
-	//for testing only
-	public static void main2(String[] args) {
-		String state = "0.50:200 10.00:100 5.00:100";// value:quantity value:quantity ...
-		//List<String> input = new ArrayList(Arrays.asList("4", "25.00", "7.50", "5.25", "14.00"));
-		List<String> input = new ArrayList(Arrays.asList("5", "1010.00", "25.00", "7.50", "5.25", "14.00"));
-		MoneyChangeDevice device = new MoneyChangeDevice(state);
-		for (int i = 1; i <= Integer.valueOf(input.get(0)); i++) {
-			device.makeChangeForAmount(input.get(i));
-		}
-	}
 
 	public MoneyChangeDevice(String initialSetup) {
 		String[] setup = initialSetup.split("\\s|:");
@@ -53,7 +33,6 @@ public class MoneyChangeDevice {
 		}
 		// System.out.println("Intial Setup" + Arrays.toString(setup));
 		// System.out.println("Intial state" + state);
-
 	}
 
 	public String makeChangeForAmount(String amount) {
@@ -94,5 +73,26 @@ public class MoneyChangeDevice {
 		//System.out.println(result);
 		return result;
 	}
+	
+	//for testing only
+		public static void main2(String[] args) {
+			String state = "0.50:200 10.00:100 5.00:100";// value:quantity value:quantity ...
+			//List<String> input = new ArrayList(Arrays.asList("4", "25.00", "7.50", "5.25", "14.00"));
+			List<String> input = new ArrayList(Arrays.asList("5", "1010.00", "25.00", "7.50", "5.25", "14.00"));
+			MoneyChangeDevice device = new MoneyChangeDevice(state);
+			for (int i = 1; i <= Integer.valueOf(input.get(0)); i++) {
+				device.makeChangeForAmount(input.get(i));
+			}
+		}
+		
+/*
+0.50:200 10.00:100 5.00:100
+4
+25.00
+7.50
+5.25
+14.00
+
+	*/
 
 }

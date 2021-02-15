@@ -12,9 +12,9 @@ public class ZombieInMatrixAmazon {
 	public static void main(String[] args) {
 		System.out.println(new ZombieInMatrixAmazon().
 				zombieTime(new int[][] {{0, 1, 1, 0, 1},
-				                            {0, 1, 0, 1, 0},
-				                            {0, 0, 0, 0, 1},
-				                            {0, 1, 0, 0, 0}}));
+				                        {0, 1, 0, 1, 0},
+				                        {0, 0, 0, 0, 1},
+				                        {0, 1, 0, 0, 0}}));
 
 	}
 	

@@ -1,4 +1,4 @@
-package algorithms.bfs;
+package algorithms.dfs;
 
 import java.util.ArrayList;
 import java.util.Arrays;

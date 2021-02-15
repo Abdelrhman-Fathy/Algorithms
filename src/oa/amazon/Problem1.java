@@ -8,25 +8,23 @@ import java.util.Queue;
 
 import oa.amazon.TreasureTruck.Node;
 
-public class CloudFrontFiles {
-	//https://github.com/Abdelrhman-Fathy/Algorithms/blob/master/OA-Amazon-Q2.JPG
-	//https://github.com/Abdelrhman-Fathy/Algorithms/blob/master/OA-Amazon-Q2-2.JPG
-	//https://github.com/Abdelrhman-Fathy/Algorithms/blob/master/OA-Amazon-Q2-3.JPG
+public class Problem1 {
+
 	
 	public static void main(String[] args) {
 		List<List<Integer>> servers = new ArrayList();
 		servers.add(new ArrayList<>(Arrays.asList(0, 1, 1, 0, 1)));
 		servers.add(new ArrayList<>(Arrays.asList(0, 1, 0, 1, 0)));
 		servers.add(new ArrayList<>(Arrays.asList(0, 0, 0, 0, 1)));
-		servers.add(new ArrayList<>(Arrays.asList(0, 0, 0, 0, 1)));
 		servers.add(new ArrayList<>(Arrays.asList(0, 1, 0, 0, 0)));
+		servers.add(new ArrayList<>(Arrays.asList(0, 0, 0, 0, 1)));
 		System.out.println("hours:" + solution(servers));
 	}
 	
-	private static int solution(List<List<Integer>> grid) {
+	private static int solution(List<List<Integer>> servers) {
 		int maxDepth = 0;
-		int rows = grid.size();
-		int cols = grid.get(0).size();
+		int rows = servers.size();
+		int cols = servers.get(0).size();
 		int[] nr = new int[] { 1, -1, 0, 0 };
 		int[] nc = new int[] { 0, 0, 1, -1 };
 		List<List<Node>> graph = new ArrayList();
@@ -35,8 +33,8 @@ public class CloudFrontFiles {
 			List<Node> nodeList = new ArrayList();
 			graph.add(nodeList);
 			for (int j = 0; j < cols; j++) {
-				nodeList.add(new Node(i, j, grid.get(i).get(j), 0));
-				if (grid.get(i).get(j).equals(1))
+				nodeList.add(new Node(i, j, servers.get(i).get(j), 0));
+				if (servers.get(i).get(j).equals(1))
 					q.add(graph.get(i).get(j));
 			}
 		}
@@ -58,15 +56,6 @@ public class CloudFrontFiles {
 			}
 			//System.out.println("depth:" + n.depth + " , row:" + n.row + ", col:" + n.col);
 		}
-		
-		
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
-				if (graph.get(i).get(j).equals(0))
-					return -1;
-			}
-		}
-		
 		return maxDepth;
 	}
 	
@@ -85,6 +74,5 @@ public class CloudFrontFiles {
 			this.depth = depth;
 		}
 	}
-	
 
 }

@@ -1,5 +1,6 @@
 package datastructures.hashtable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,41 +23,48 @@ public class AmazonTopNCompetitors {
 	}
 	
 	
-	public List<String> solution(int numCompetitors, int topNCompetitors, List<String> competitors, 
-			int numReviews, List<String> reviews){
+	public List<String> solution(int numToys, int topToys, List<String> toys, 
+			int numQuotes, List<String> quotes){
 		//if(topNCompetitors>competitors.size()) use only the competitors list
 		//convert reviews to lower case
 		//convert competitors to lower case
-		reviews = toLowerCase(reviews);
-		competitors = toLowerCase(competitors);
+		
+		ArrayList<String> result = new ArrayList<>();
+		quotes = toLowerCase(quotes);
+		toys = toLowerCase(toys);
 		Map<String, Integer> count = new HashMap<>();
-		for(int i = 0; i < competitors.size(); i++) {
-			for(int j = 0; j < reviews.size(); j++) {
-				if(reviews.get(j).contains(competitors.get(i))) {
-					if(count.get(competitors.get(i)) == null) {
-						count.put(competitors.get(i), 1);
+		for(int i = 0; i < toys.size(); i++) {
+			for(int j = 0; j < quotes.size(); j++) {
+				if(quotes.get(j).contains(toys.get(i))) {
+					if(count.get(toys.get(i)) == null) {
+						count.put(toys.get(i), 1);
 					} else {
-						count.put(competitors.get(i), count.get(competitors.get(i)) + 1);
+						count.put(toys.get(i), count.get(toys.get(i)) + 1);
 					}
 				}
 			}
 		}
 		//System.out.println(count);
 		
-		PriorityQueue<String> heap = new PriorityQueue<>((n1,n2)->count.get(n1)-count.get(n2));
-		int k = (topNCompetitors>competitors.size()? competitors.size() : topNCompetitors);
+		PriorityQueue<String> heap = new PriorityQueue<>((n1,n2)->compare(count, n1,n2));
+		int k = (topToys>toys.size()? toys.size() : topToys);
 		for(String i : count.keySet()) {
 			heap.add(i);
 			if(heap.size()>k)
 				heap.poll();
 		}
 		
-		List<String> result = new LinkedList<>();
+		
 		while(!heap.isEmpty()) {
 			result.add(heap.poll());
 		}
 		Collections.reverse(result);
 		return result;
+	}
+	
+	public int compare(Map<String, Integer> count, String n1, String n2){
+		if(count.get(n1) == count.get(n2)) return n1.compareTo(n2);
+		else return count.get(n1)-count.get(n2);
 	}
 	
 	public List<String> toLowerCase(List<String> input){
